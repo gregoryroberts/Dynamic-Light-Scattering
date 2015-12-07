@@ -4,23 +4,8 @@
 #include <stddef.h>
 #include <vector>
 
-// this needs to be done
-struct ParticleType;
-
-template< typename T >
-struct Point3D {
-    Point3D( T _x, T _y, T _z)
-    : x( _x ),
-    y( _y ),
-    z( _z )
-    {
-        // empty
-    }
-
-    T x;
-    T y;
-    T z;
-};
+#include "ParticleType.h"
+#include "Point.h"
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 class ParticleBox
@@ -70,6 +55,5 @@ class ParticleBox
 
 
 #include "ParticleBox.inl"
-
 
 #endif /* __PARTICLE_BOX_H__ */
