@@ -3,6 +3,6 @@
 int main( int argc, char * argv[] )
 {
 
-	printf("Hello, Isabel\n");
+	printf("Hello, Dynamic Light Scattering\n");
 
 }
