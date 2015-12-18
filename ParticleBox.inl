@@ -3,6 +3,9 @@
 
 // todo(groberts): these should be separated out
 #include <cstdlib>
+#include <cmath>
+#include "Configuration.h"
+#include "Constant.h"
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 ParticleBox< ParticleCount, MaxNumberParticles >::ParticleBox(
@@ -54,12 +57,18 @@ void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
 {
     for ( size_t type = 0; type < particle_locations_.size(); ++type ) {
         
-        std::vector< Point3D< double > > & particle_list = particle_locations_[ type ];
-        for ( size_t particle = 0; particle < particle_list.size(); ++particle ) {
+        const double particle_mass = particle_types_[ type ].mass;
+        const double root_mean_squared_velocity =
+            sqrt(
+                3 * Constant::kBoltzmannConstant * Configuration::kKelvinTemperature /
+                particle_mass );
 
-            Point3D< double > & current_particle_location = particle_list[ particle ];
-            update_model( timestep, current_particle_location, box_dimensions_ );
-        }
+        std::vector< Point3D< double > > & particle_list = particle_locations_[ type ];
+
+        update_model(
+            timestep,
+            root_mean_squared_velocity,
+            particle_list );
     }
 }
 
