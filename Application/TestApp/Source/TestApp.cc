@@ -1,3 +1,4 @@
+#include "Laser.h"
 #include "ParticleBox.h"
 
 int main( int argc, char * argv[] )

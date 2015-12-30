@@ -1,6 +1,8 @@
 #ifndef __LASER_H__
 #define __LASER_H__
 
+#include <stdlib.h>
+
 /*
 	For now, this is governed by a 1D Gaussian drop-off
 	in intensity with distance from the beam center.  This
@@ -20,10 +22,14 @@
 class Laser {
 
   public:
-  	Laser() = default;
+  	Laser();
   	Laser( const double sigma, const double max_intensity );
 
   	double operator()( const double coordinate );
+  	void operator()(
+  		const double * const coordinates,
+  		const size_t number_of_coordinates,
+  		double * const intensities );
 
   private:
   	double sigma_;
