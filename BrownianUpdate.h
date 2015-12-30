@@ -1,7 +1,7 @@
 #ifndef __BROWNIAN_UPDATE_H__
 #define __BROWNIAN_UPDATE_H__
 
-#include "Point.h"
+#include "Math/Point.h"
 
 /*
     Update the particles in a random direction

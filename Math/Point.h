@@ -1,5 +1,5 @@
-#ifndef __POINT_H__
-#define __POINT_H__
+#ifndef __MATH_POINT_H__
+#define __MATH_POINT_H__
 
 template< typename T >
 struct Point2D {
@@ -29,4 +29,4 @@ struct Point3D {
     T z;
 };
 
-#endif /* __POINT_H__ */
+#endif /* __MATH_POINT_H__ */

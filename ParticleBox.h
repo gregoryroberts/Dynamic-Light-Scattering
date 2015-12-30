@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "ParticleType.h"
-#include "Point.h"
+#include "Math/Point.h"
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 class ParticleBox
