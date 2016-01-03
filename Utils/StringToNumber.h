@@ -3,8 +3,11 @@
 
 #include <string>
 
-template< typename ValueType >
-ValueType StringToNumber( const std::string & input_string );
+template< typename IntegralType >
+IntegralType StringToIntegralType( const std::string & input_string );
+
+template< typename FloatingType >
+FloatingType StringToFloatingType( const std::string & input_string );
 
 #include "Utils/StringToNumber.inl"
 
