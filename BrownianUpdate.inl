@@ -1,9 +1,6 @@
 #ifndef __BROWNIAN_UPDATE_INL__
 #define __BROWNIAN_UPDATE_INL__
 
-// todo(groberts): these should be separated out
-#include <cstdlib>
-
 BrownianUpdate::operator()(
     const double timestep_in_seconds,
     const double root_mean_squared_velocity,

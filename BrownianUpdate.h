@@ -1,6 +1,7 @@
 #ifndef __BROWNIAN_UPDATE_H__
 #define __BROWNIAN_UPDATE_H__
 
+#include "Common/Common.h"
 #include "Math/Point.h"
 
 /*

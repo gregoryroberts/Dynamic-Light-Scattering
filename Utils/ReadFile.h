@@ -1,9 +1,7 @@
 #ifndef __UTILS_READ_FILE_H__
 #define __UTILS_READ_FILE_H__
 
-#include "Common/Status.h"
-
-#include <string>
+#include "Common/Common.h"
 
 /*
 	Reads the values from the file into the given std::vector
@@ -17,8 +15,10 @@
 	new values on the end of the vector that was passed into the function.
 */
 
-template< typename ValueType >
-Status ReadFile( const std::string & filename, std::vector< ValueType > & values );
+template< typename FloatingType >
+Status ReadFileFloat(
+	const std::string & filename,
+	std::vector< FloatingType > & values );
 
 #include "Utils/ReadFile.inl"
 

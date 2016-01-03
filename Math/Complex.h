@@ -1,6 +1,8 @@
 #ifndef __MATH_COMPLEX_H__
 #define __MATH_COMPLEX_H__
 
+#include "Common/Common.h"
+
 template< typename Type >
 struct ComplexRectangular {
 

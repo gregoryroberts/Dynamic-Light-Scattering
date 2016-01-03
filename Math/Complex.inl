@@ -1,8 +1,6 @@
 #ifndef __MATH_COMPLEX_INL__
 #define __MATH_COMPLEX_INL__
 
-#include <cmath>
-
 template< typename Type >
 ComplexRectangular< Type >::ComplexRectangular( Type real_part, Type imaginary_part )
 : real_part_( real_part ),

@@ -1,9 +1,6 @@
 #ifndef __PARTICLE_BOX_INL__
 #define __PARTICLE_BOX_INL__
 
-// todo(groberts): these should be separated out
-#include <cstdlib>
-#include <cmath>
 #include "Configuration.h"
 #include "Constant.h"
 

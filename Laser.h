@@ -1,7 +1,7 @@
 #ifndef __LASER_H__
 #define __LASER_H__
 
-#include <stdlib.h>
+#include "Common/Common.h"
 
 /*
 	For now, this is governed by a 1D Gaussian drop-off

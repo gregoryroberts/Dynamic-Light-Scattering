@@ -1,6 +1,8 @@
 #ifndef __CONFIGURATION_H__
 #define __CONFIGURATION_H__
 
+#include "Common/Common.h"
+
 struct Configuration {
 
 	// room temperature for now

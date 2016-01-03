@@ -14,7 +14,7 @@ int main( int argc, char * argv[] )
 	std::string filename( "Data/test.out" );
 	std::vector< double > values;
 
-	const Status read_status = ReadFile( filename, values );
+	const Status read_status = ReadFileFloat( filename, values );
 
 	for ( size_t v = 0; v < values.size(); ++v ) {
 		printf( "The next value is %.30f\n", values[ v ] );

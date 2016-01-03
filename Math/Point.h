@@ -1,6 +1,8 @@
 #ifndef __MATH_POINT_H__
 #define __MATH_POINT_H__
 
+#include "Common/Common.h"
+
 template< typename T >
 struct Point2D {
     Point2D( T _x, T _y )

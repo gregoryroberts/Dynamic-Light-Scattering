@@ -1,7 +1,7 @@
 #ifndef __COMMON_STATUS_H__
 #define __COMMON_STATUS_H__
 
-#include <stdlib.h>
+#include "Common/Common.h"
 
 enum class Status : uint8_t {
 	Failure = 0,

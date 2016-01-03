@@ -1,11 +1,9 @@
 #ifndef __PARTICLE_BOX_H__
 #define __PARTICLE_BOX_H__
 
-#include <stddef.h>
-#include <vector>
-
-#include "ParticleType.h"
+#include "Common/Common.h"
 #include "Math/Point.h"
+#include "ParticleType.h"
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 class ParticleBox

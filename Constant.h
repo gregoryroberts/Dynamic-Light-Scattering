@@ -1,6 +1,8 @@
 #ifndef __CONSTANT_H__
 #define __CONSTANT_H__
 
+#include "Common/Common.h"
+
 struct Constant {
 
 	// in m^2 * kg / ( s^2 * K )
