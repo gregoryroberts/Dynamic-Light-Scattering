@@ -3,6 +3,10 @@
 
 #include <assert.h>
 
+namespace DLS {
+
 #define DLS_ASSERT( condition, message ) assert( condition && message )
+
+} // namespace DLS
 
 #endif /* __COMMON_ASSERT_H__ */

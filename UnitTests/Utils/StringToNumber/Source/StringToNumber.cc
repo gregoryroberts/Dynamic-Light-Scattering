@@ -4,6 +4,9 @@
 int main( int argc, char * argv[] )
 {
 
+	using namespace DLS;
+	using namespace Utils;
+
 	printf( "\n-------- StringToNumber --------\n\n" );
 
 	std::string floating( "1.32123f" );

@@ -3,6 +3,9 @@
 
 #include "Common/Common.h"
 
+namespace DLS {
+namespace Math {
+
 template< typename Type >
 struct ComplexRectangular {
 
@@ -41,6 +44,8 @@ struct ComplexPolar {
 
 };
 
+} // namespace Math
+} // namespace DLS
 
 #include "Math/Complex.inl"
 

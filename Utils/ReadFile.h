@@ -3,6 +3,9 @@
 
 #include "Common/Common.h"
 
+namespace DLS {
+namespace Utils {
+
 /*
 	Reads the values from the file into the given std::vector
 	container.  It returns a Failure Status if something goes wrong
@@ -19,6 +22,9 @@ template< typename FloatingType >
 Status ReadFileFloat(
 	const std::string & filename,
 	std::vector< FloatingType > & values );
+
+} // namespace Utils
+} // namespace DLS
 
 #include "Utils/ReadFile.inl"
 

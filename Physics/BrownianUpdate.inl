@@ -1,5 +1,8 @@
-#ifndef __BROWNIAN_UPDATE_INL__
-#define __BROWNIAN_UPDATE_INL__
+#ifndef __PHYSICS_BROWNIAN_UPDATE_INL__
+#define __PHYSICS_BROWNIAN_UPDATE_INL__
+
+namespace DLS {
+namespace Physics {
 
 BrownianUpdate::operator()(
     const double timestep_in_seconds,
@@ -34,4 +37,7 @@ BrownianUpdate::operator()(
 	}
 }
 
-#endif /* __BROWNIAN_UPDATE_INL__ */
+} // namespace Physics
+} // namespace DLS
+
+#endif /* __PHYSICS_BROWNIAN_UPDATE_INL__ */

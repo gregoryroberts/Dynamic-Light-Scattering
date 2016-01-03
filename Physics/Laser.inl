@@ -1,8 +1,8 @@
-#ifndef __LASER_INL__
-#define __LASER_INL__
+#ifndef __PHYSICS_LASER_INL__
+#define __PHYSICS_LASER_INL__
 
-#include <assert.h>
-#include <math.h>
+namespace DLS {
+namespace Physics {
 
 Laser::Laser()
 : sigma_( 1.0f ),
@@ -16,7 +16,7 @@ Laser::Laser( const double sigma, const double max_intensity )
 : sigma_( sigma ),
 max_intensity_( max_intensity )
 {
-	assert( sigma_ >= 0.0f );
+	DLS_ASSERT( sigma_ >= 0.0f, "Invalid sigma given for Gaussian" );
 
 	prefactor_ = 1.0f / ( sqrt( 2 * M_PI ) * sigma );
 	exponent_divisor_ = 1.0f / ( 2 * sigma * sigma );
@@ -24,12 +24,10 @@ max_intensity_( max_intensity )
 
 double Laser::operator()( const double coordinate )
 {
-
 	return
 		max_intensity_ *
 		prefactor_ *
 		exp( coordinate * coordinate * exponent_divisor_ );
-
 }
 
 void Laser::operator()(
@@ -44,4 +42,7 @@ void Laser::operator()(
 
 }
 
-#endif /* __LASER_INL__ */
+} // namespace Physics
+} // namespace DLS
+
+#endif /* __PHYSICS_LASER_INL__ */

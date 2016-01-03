@@ -1,10 +1,13 @@
 #include "Common/Status.h"
-#include "Laser.h"
-#include "ParticleBox.h"
+#include "Physics/Laser.h"
+#include "Physics/ParticleBox.h"
 #include "Utils/ReadFile.h"
 
 int main( int argc, char * argv[] )
 {
+
+	using namespace DLS;
+	using namespace Utils;
 
 	printf( "Hello, Dynamic Light Scattering\n" );
 
@@ -22,6 +25,5 @@ int main( int argc, char * argv[] )
 
 	printf("The result of the reading was a %s\n",
 		read_status == Status::Success ? "success" : "failure");
-
 
 }

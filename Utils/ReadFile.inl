@@ -3,8 +3,8 @@
 
 #include "Utils/StringToNumber.h"
 
-// todo: get some namespaces in here for readability and
-// organization (especially if you have sub-folders like this)
+namespace DLS {
+namespace Utils {
 
 template< typename FloatingType >
 Status ReadFileFloat(
@@ -32,5 +32,8 @@ Status ReadFileFloat(
 		return Status::Success;
 	}
 }
+
+} // namespace Utils
+} // namespace DLS
 
 #endif /* __UTILS_READ_FILE_INL__ */

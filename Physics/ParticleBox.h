@@ -1,9 +1,12 @@
-#ifndef __PARTICLE_BOX_H__
-#define __PARTICLE_BOX_H__
+#ifndef __PHYSICS_PARTICLE_BOX_H__
+#define __PHYSICS_PARTICLE_BOX_H__
 
 #include "Common/Common.h"
 #include "Math/Point.h"
-#include "ParticleType.h"
+#include "Physics/ParticleType.h"
+
+namespace DLS {
+namespace Physics {
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 class ParticleBox
@@ -36,7 +39,7 @@ class ParticleBox
     // templated on ParticleType to grab out the locations for a particle of
     // a specific type -- is this the best way to do that
     template< typename ParticleType >
-    void GetLocationList( std::vector< Point3D< double > > & locations );
+    void GetLocationList( std::vector< Math::Point3D< double > > & locations );
 
   private:
     ParticleType * particle_types_;
@@ -44,14 +47,13 @@ class ParticleBox
 
     double box_dimensions_[ 3 ];
 
-    std::vector< std::vector< Point3D< double > > > particle_locations_;
+    std::vector< std::vector< Math::Point3D< double > > > particle_locations_;
 
 };
 
+} // namespace Physics
+} // namespace DLS
 
+#include "Physics/ParticleBox.inl"
 
-
-
-#include "ParticleBox.inl"
-
-#endif /* __PARTICLE_BOX_H__ */
+#endif /* __PHYSICS_PARTICLE_BOX_H__ */
