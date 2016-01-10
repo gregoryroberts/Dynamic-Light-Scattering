@@ -1,6 +1,11 @@
 #ifndef __MATH_COMPLEX_H__
 #define __MATH_COMPLEX_H__
 
+#include "Common/Common.h"
+
+namespace DLS {
+namespace Math {
+
 template< typename Type >
 struct ComplexRectangular {
 
@@ -39,6 +44,8 @@ struct ComplexPolar {
 
 };
 
+} // namespace Math
+} // namespace DLS
 
 #include "Math/Complex.inl"
 

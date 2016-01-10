@@ -1,6 +1,11 @@
 #ifndef __MATH_POINT_H__
 #define __MATH_POINT_H__
 
+#include "Common/Common.h"
+
+namespace DLS {
+namespace Math {
+
 template< typename T >
 struct Point2D {
     Point2D( T _x, T _y )
@@ -28,5 +33,8 @@ struct Point3D {
     T y;
     T z;
 };
+
+} // namespace Math
+} // namespace DLS
 
 #endif /* __MATH_POINT_H__ */

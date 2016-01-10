@@ -1,11 +1,11 @@
-#ifndef __PARTICLE_BOX_INL__
-#define __PARTICLE_BOX_INL__
+#ifndef __PHYSICS_PARTICLE_BOX_INL__
+#define __PHYSICS_PARTICLE_BOX_INL__
 
-// todo(groberts): these should be separated out
-#include <cstdlib>
-#include <cmath>
-#include "Configuration.h"
-#include "Constant.h"
+#include "Physics/Configuration.h"
+#include "Physics/Constant.h"
+
+namespace DLS {
+namespace Physics {
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 ParticleBox< ParticleCount, MaxNumberParticles >::ParticleBox(
@@ -25,6 +25,8 @@ particle_counts_( particle_counts )
 template< size_t ParticleCount, size_t MaxNumberParticles >
 void ParticleBox< ParticleCount, MaxNumberParticles >::Reset()
 {
+
+    using namespace Math;
 
     // seed random number generator
     srand( time( NULL ) );
@@ -55,6 +57,8 @@ void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
     double timestep,
     UpdateFunctor update_model )
 {
+    using namespace Math;
+
     for ( size_t type = 0; type < particle_locations_.size(); ++type ) {
         
         const double particle_mass = particle_types_[ type ].mass;
@@ -72,5 +76,7 @@ void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
     }
 }
 
+} // namespace Physics
+} // namespace DLS
 
-#endif /* __PARTICLE_BOX_INL__ */
+#endif /* __PHYSICS_PARTICLE_BOX_INL__ */

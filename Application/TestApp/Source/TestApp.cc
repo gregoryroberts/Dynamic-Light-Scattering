@@ -1,10 +1,13 @@
 #include "Common/Status.h"
-#include "Laser.h"
-#include "ParticleBox.h"
+#include "Physics/Laser.h"
+#include "Physics/ParticleBox.h"
 #include "Utils/ReadFile.h"
 
 int main( int argc, char * argv[] )
 {
+
+	using namespace DLS;
+	using namespace Utils;
 
 	printf( "Hello, Dynamic Light Scattering\n" );
 
@@ -14,7 +17,7 @@ int main( int argc, char * argv[] )
 	std::string filename( "Data/test.out" );
 	std::vector< double > values;
 
-	const Status read_status = ReadFile( filename, values );
+	const Status read_status = ReadFileFloat( filename, values );
 
 	for ( size_t v = 0; v < values.size(); ++v ) {
 		printf( "The next value is %.30f\n", values[ v ] );
@@ -22,6 +25,5 @@ int main( int argc, char * argv[] )
 
 	printf("The result of the reading was a %s\n",
 		read_status == Status::Success ? "success" : "failure");
-
 
 }

@@ -1,7 +1,10 @@
-#ifndef __LASER_H__
-#define __LASER_H__
+#ifndef __PHYSICS_LASER_H__
+#define __PHYSICS_LASER_H__
 
-#include <stdlib.h>
+#include "Common/Common.h"
+
+namespace DLS {
+namespace Physics {
 
 /*
 	For now, this is governed by a 1D Gaussian drop-off
@@ -39,6 +42,9 @@ class Laser {
 
 };
 
-#include "Laser.inl"
+} // namespace Physics
+} // namespace DLS
 
-#endif /* __LASER_H__ */
+#include "Physics/Laser.inl"
+
+#endif /* __PHYSICS_LASER_H__ */

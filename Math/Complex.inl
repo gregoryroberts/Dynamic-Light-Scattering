@@ -1,7 +1,8 @@
 #ifndef __MATH_COMPLEX_INL__
 #define __MATH_COMPLEX_INL__
 
-#include <cmath>
+namespace DLS {
+namespace Math {
 
 template< typename Type >
 ComplexRectangular< Type >::ComplexRectangular( Type real_part, Type imaginary_part )
@@ -32,5 +33,8 @@ void ComplexPolar< Type >::operator = ( const ComplexRectangular< Type > & recta
 	const Type real_part = rectangular_form.Real();
 	const Type imag_part = rectangular_form.Imaginary();
 }
+
+} // namespace Math
+} // namespace DLS
 
 #endif /* __MATH_COMPLEX_INL__ */

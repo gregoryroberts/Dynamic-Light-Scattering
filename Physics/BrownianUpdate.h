@@ -1,7 +1,11 @@
-#ifndef __BROWNIAN_UPDATE_H__
-#define __BROWNIAN_UPDATE_H__
+#ifndef __PHYSICS_BROWNIAN_UPDATE_H__
+#define __PHYSICS_BROWNIAN_UPDATE_H__
 
+#include "Common/Common.h"
 #include "Math/Point.h"
+
+namespace DLS {
+namespace Physics {
 
 /*
     Update the particles in a random direction
@@ -21,7 +25,9 @@ struct BrownianUpdate {
         std::vector< Point3D< double > > & particle_list );
 };
 
+} // namespace Physics
+} // namespace DLS
 
-#include "BrownianUpdate.inl"
+#include "Physics/BrownianUpdate.inl"
 
-#endif /* __BROWNIAN_UPDATE_H__ */
+#endif /* __PHYSICS_BROWNIAN_UPDATE_H__ */

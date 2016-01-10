@@ -1,10 +1,19 @@
 #ifndef __UTILS_STRING_TO_NUMBER_H__
 #define __UTILS_STRING_TO_NUMBER_H__
 
-#include <string>
+#include "Common/Common.h"
 
-template< typename ValueType >
-ValueType StringToNumber( const std::string & input_string );
+namespace DLS {
+namespace Utils {
+
+template< typename IntegralType >
+IntegralType StringToIntegralType( const std::string & input_string );
+
+template< typename FloatingType >
+FloatingType StringToFloatingType( const std::string & input_string );
+
+} // namespace Utils
+} // namespace DLS
 
 #include "Utils/StringToNumber.inl"
 
