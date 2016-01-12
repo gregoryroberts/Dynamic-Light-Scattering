@@ -16,8 +16,10 @@ struct ComplexRectangular {
 
   void operator = ( const ComplexPolar< ValueType > & polar_form );
 
-  Type Real();
-  Type Imaginary();
+  Type &          Imaginary();
+  const Type &    Imaginary() const;
+  Type &          Real();
+  const Type      Real() const;
 
   private:
     Type real_part_;
@@ -35,8 +37,10 @@ struct ComplexPolar {
 
   void operator = ( const ComplexRectangular< ValueType > & rectangular_form );
 
-  Type Magnitude();
-  Type Angle();
+  Type &        Angle();
+  const Type &  Angle() const;
+  Type &        Magnitude();
+  const Type &  Magnitude() const;
 
   private:
     Type magnitude_;

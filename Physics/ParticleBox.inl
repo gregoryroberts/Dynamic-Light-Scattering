@@ -8,7 +8,7 @@ namespace DLS {
 namespace Physics {
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
-ParticleBox< ParticleCount, MaxNumberParticles >::ParticleBox(
+DLS_INLINE ParticleBox< ParticleCount, MaxNumberParticles >::ParticleBox(
     ParticleType * particle_types,
     size_t * particle_counts,
     double box_dimensions[ 3 ] )
@@ -23,7 +23,7 @@ particle_counts_( particle_counts )
 }
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
-void ParticleBox< ParticleCount, MaxNumberParticles >::Reset()
+DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::Reset()
 {
 
     using namespace Math;
