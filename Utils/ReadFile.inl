@@ -7,7 +7,7 @@ namespace DLS {
 namespace Utils {
 
 template< typename FloatingType >
-Status ReadFileFloat(
+DLS_INLINE Status ReadFileFloat(
 	const std::string & filename,
 	std::vector< FloatingType > & values )
 {

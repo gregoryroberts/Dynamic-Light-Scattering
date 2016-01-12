@@ -4,7 +4,7 @@
 namespace DLS {
 namespace Physics {
 
-Laser::Laser()
+DLS_INLINE Laser::Laser()
 : sigma_( 1.0f ),
 max_intensity_( 1.0f )
 {
@@ -12,7 +12,7 @@ max_intensity_( 1.0f )
 	exponent_divisor_ = 1.0f / ( 2 * /* sigma */ 1.0f * /* sigma */ 1.0f );
 }
 
-Laser::Laser( const double sigma, const double max_intensity )
+DLS_INLINE Laser::Laser( const double sigma, const double max_intensity )
 : sigma_( sigma ),
 max_intensity_( max_intensity )
 {
@@ -22,7 +22,7 @@ max_intensity_( max_intensity )
 	exponent_divisor_ = 1.0f / ( 2 * sigma * sigma );
 }
 
-double Laser::operator()( const double coordinate )
+DLS_INLINE double Laser::operator()( const double coordinate )
 {
 	return
 		max_intensity_ *
@@ -30,7 +30,7 @@ double Laser::operator()( const double coordinate )
 		exp( coordinate * coordinate * exponent_divisor_ );
 }
 
-void Laser::operator()(
+DLS_INLINE void Laser::operator()(
 	const double * const coordinates,
 	const size_t number_of_coordinates,
 	double * const intensities )
