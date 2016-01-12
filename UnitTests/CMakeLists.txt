@@ -13,5 +13,4 @@ include_directories("$ENV{DLS_CODE_BASE}")
 
 # add all of the tests here
 add_subdirectory(Utils/StringToNumber)
-
-# add_executable(TestApp Source/TestApp.cc)
+add_subdirectory(Physics/CMOSImager)
