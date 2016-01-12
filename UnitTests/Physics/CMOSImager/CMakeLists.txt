@@ -1,0 +1,1 @@
+add_executable(CMOSImager Source/CMOSImager.cc)
