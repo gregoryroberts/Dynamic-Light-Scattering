@@ -26,18 +26,29 @@ class Laser {
 
   public:
   	Laser();
-  	Laser( const double sigma, const double max_intensity );
+  	Laser(
+      const double sigma,
+      const double mean_x,
+      const double mean_y,
+      const double max_intensity );
 
-  	double operator()( const double coordinate );
+  	double operator()(
+      const double coordinate_x,
+      const double coordinate_y );
   	void operator()(
-  		const double * const coordinates,
+  		const double * const coordinates_x,
+      const double * const coordinates_y,
   		const size_t number_of_coordinates,
   		double * const intensities );
 
   private:
   	double sigma_;
+    double mean_x_;
+    double mean_y_;
   	double max_intensity_;
+    // 1 / ( 2 * pi * sigma^2 ) --> normalization over plane
   	double prefactor_;
+    // 1 / ( 2 * sigma^2 ) --> exponent always multiplied by this quantity
   	double exponent_divisor_;
 
 };
