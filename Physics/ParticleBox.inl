@@ -9,7 +9,7 @@ namespace Physics {
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 DLS_INLINE ParticleBox< ParticleCount, MaxNumberParticles >::ParticleBox(
-    ParticleType * particle_types,
+    ParticleType< double > * particle_types,
     size_t * particle_counts,
     double box_dimensions[ 3 ] )
 : particle_types_( particle_types ),
@@ -53,7 +53,7 @@ DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::Reset()
 
 template< size_t ParticleCount, size_t MaxNumberParticles >
 template< typename UpdateFunctor >
-void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
+DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
     double timestep,
     UpdateFunctor update_model )
 {
@@ -74,6 +74,20 @@ void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
             root_mean_squared_velocity,
             particle_list );
     }
+}
+
+template< size_t ParticleCount, size_t MaxNumberParticles >
+DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::GetLocationList(
+    std::vector< Math::Point3D< double > > & locations,
+    const particle_id particle_number )
+{
+    const size_t number_location_lists = particle_locations_.size();
+
+    DLS_ASSERT(
+        particle_number < number_location_lists,
+        "This particle ID is out of bounds and thus not accounted for" );
+
+    locations = particle_locations_[ particle_number ];
 }
 
 } // namespace Physics

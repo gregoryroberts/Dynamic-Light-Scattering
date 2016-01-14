@@ -15,8 +15,8 @@ imaginary_part_( imaginary_part )
 template< typename Type >
 DLS_INLINE void ComplexRectangular< Type >::operator = ( const ComplexPolar< Type > & polar_form )
 {
-	this->real_part_ = magnitude_ * cos( angle_ );
-	this->imaginary_part_ = magnitude_ * sin( angle_ );
+	this->real_part_ = polar_form.Magnitude() * cos( polar_form.Angle() );
+	this->imaginary_part_ = polar_form.Magnitude() * sin( polar_form.Angle() );
 }
 
 template< typename Type >
@@ -53,8 +53,12 @@ DLS_INLINE void ComplexPolar< Type >::operator = ( const ComplexRectangular< Typ
 	const Type real_part = rectangular_form.Real();
 	const Type imaginary_part = rectangular_form.Imaginary();
 
-	this->magnitude_ = sqrt( real_part * real_part + imaginary_part * imaginary_part );
-	this->angle_ = atan2( imaginary_part, real_part );
+	this->magnitude_ = sqrt(
+		rectangular_form.Real() * rectangular_form.Real() +
+		rectangular_form.Imaginary() * rectangular_form.Imaginary() );
+	this->angle_ = atan2(
+		rectangular_form.Imaginary(),
+		rectangular_form.Real() );
 }
 
 template< typename Type >
@@ -68,12 +72,12 @@ DLS_INLINE const Type & ComplexPolar< Type >::Angle() const {
 }
 
 template< typename Type >
-DLS_INLINE Type & ComplexPolar< Type >::Magnitdue() {
+DLS_INLINE Type & ComplexPolar< Type >::Magnitude() {
 	return magnitude_;
 }
 
 template< typename Type >
-DLS_INLINE const Type & ComplexPolar< Type >::Magnitdue() const {
+DLS_INLINE const Type & ComplexPolar< Type >::Magnitude() const {
 	return magnitude_;
 }
 

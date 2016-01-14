@@ -13,14 +13,13 @@ class ParticleBox
 {
 
   public:
-
     static constexpr size_t kParticleCount = ParticleCount;
     static constexpr size_t kMaxNumberParticles = MaxNumberParticles;
 
     /* Constructors */
     ParticleBox() = delete;
     ParticleBox(
-        ParticleType * particle_types,
+        ParticleType< double > * particle_types,
         size_t * particle_counts,
         double box_dimensions[ 3 ] );
 
@@ -36,13 +35,12 @@ class ParticleBox
         UpdateFunctor update_model );
 
     /* Member accessor */
-    // templated on ParticleType to grab out the locations for a particle of
-    // a specific type -- is this the best way to do that
-    template< typename ParticleType >
-    void GetLocationList( std::vector< Math::Point3D< double > > & locations );
+     void GetLocationList(
+        std::vector< Math::Point3D< double > > & locations,
+        const particle_id particle_number );
 
   private:
-    ParticleType * particle_types_;
+    ParticleType< double > * particle_types_;
     size_t * particle_counts_;
 
     double box_dimensions_[ 3 ];
