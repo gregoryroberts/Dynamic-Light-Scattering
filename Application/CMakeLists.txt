@@ -12,4 +12,4 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Bin)
 include_directories("$ENV{DLS_CODE_BASE}")
 
 add_subdirectory(TestApp)
-add_subdirectory(LaserWithImagerAtAngle)
+add_subdirectory(LaserWithPhotodiodeAtAngle)

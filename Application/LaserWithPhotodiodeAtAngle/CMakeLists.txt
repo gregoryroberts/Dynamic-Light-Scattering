@@ -1,0 +1,1 @@
+add_executable(LaserWithPhotodiodeAtAngle Source/LaserWithPhotodiodeAtAngle.cc)
