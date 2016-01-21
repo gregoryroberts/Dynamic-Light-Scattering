@@ -2,13 +2,17 @@
 #define __PHYSICS_PARTICLE_TYPE_H__
 
 #include "Common/Common.h"
+#include "Math/Complex.h"
 
 namespace DLS {
 namespace Physics {
 
-enum class ParticleType {
-    PM2_5,
-    PM10
+typedef size_t particle_id;
+
+template< typename Type >
+struct ParticleType {
+	Math::ComplexRectangular< Type > index_of_refraction;
+	Type mass;
 };
 
 } // namespace Physics

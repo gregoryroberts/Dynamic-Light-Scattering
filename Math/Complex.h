@@ -6,6 +6,13 @@
 namespace DLS {
 namespace Math {
 
+/* Forward declarations */
+template< typename Type >
+struct ComplexRectangular;
+
+template< typename Type >
+struct ComplexPolar;
+
 template< typename Type >
 struct ComplexRectangular {
 
@@ -19,7 +26,7 @@ struct ComplexRectangular {
   Type &          Imaginary();
   const Type &    Imaginary() const;
   Type &          Real();
-  const Type      Real() const;
+  const Type &    Real() const;
 
   private:
     Type real_part_;
