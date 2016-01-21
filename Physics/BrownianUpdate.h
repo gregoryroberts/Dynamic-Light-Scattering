@@ -22,7 +22,8 @@ struct BrownianUpdate {
     void operator()(
         const double timestep_in_seconds,
         const double root_mean_squared_velocity,
-        std::vector< Point3D< double > > & particle_list );
+        std::vector< Point3D< double > > & particle_list ); 
+
 };
 
 } // namespace Physics

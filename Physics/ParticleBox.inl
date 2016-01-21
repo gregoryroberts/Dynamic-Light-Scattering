@@ -7,33 +7,40 @@
 namespace DLS {
 namespace Physics {
 
-template< size_t ParticleCount, size_t MaxNumberParticles >
-DLS_INLINE ParticleBox< ParticleCount, MaxNumberParticles >::ParticleBox(
-    ParticleType< double > * particle_types,
-    size_t * particle_counts,
-    double box_dimensions[ 3 ] )
-: particle_types_( particle_types ),
-particle_counts_( particle_counts )
+DLS_INLINE ParticleBox::ParticleBox(
+    const std::vector< ParticleType< double > > particle_types,
+    const std::vector< size_t > counts_of_each_particle,
+    const double box_dimensions[ 3 ] )
 {
     box_dimensions_[ 0 ] = box_dimensions[ 0 ];
     box_dimensions_[ 1 ] = box_dimensions[ 1 ];
     box_dimensions_[ 2 ] = box_dimensions[ 2 ];
 
-    particle_locations_.clear();
+    DLS_ASSERT(
+        particle_types.size() == counts_of_each_particle.size(),
+        "There needs to be a count specified for each particle" );
+
+    particle_types_ = particle_types;
+    counts_of_each_particle_ = counts_of_each_particle;
+
+    Setup();
+
 }
 
-template< size_t ParticleCount, size_t MaxNumberParticles >
-DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::Reset()
+DLS_INLINE void ParticleBox::Setup()
 {
 
     using namespace Math;
 
+    particle_locations_.clear();
+
     // seed random number generator
     srand( time( NULL ) );
 
-    for ( size_t type = 0; type < particle_locations_.size(); ++type ) {
+    for ( size_t type = 0; type < particle_types_.size(); ++type ) {
         
         std::vector< Point3D< double > > & particle_list = particle_locations_[ type ];
+        particle_list.resize( counts_of_each_particle_[ type ] );
         for ( size_t particle = 0; particle < particle_list.size(); ++particle ) {
             // randomly place the particles in the box - i.e. random location in each direction
             
@@ -51,9 +58,8 @@ DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::Reset()
     }
 }
 
-template< size_t ParticleCount, size_t MaxNumberParticles >
 template< typename UpdateFunctor >
-DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
+DLS_INLINE void ParticleBox::Update(
     double timestep,
     UpdateFunctor update_model )
 {
@@ -76,8 +82,7 @@ DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::Update(
     }
 }
 
-template< size_t ParticleCount, size_t MaxNumberParticles >
-DLS_INLINE void ParticleBox< ParticleCount, MaxNumberParticles >::GetLocationList(
+DLS_INLINE void ParticleBox::GetLocationList(
     std::vector< Math::Point3D< double > > & locations,
     const particle_id particle_number )
 {
