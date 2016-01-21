@@ -1,14 +1,16 @@
 #ifndef __MATH_GEOMETRY_PLANE_H__
 #define __MATH_GEOMETRY_PLANE_H__
 
-/*
-	A description of a 2D plane in 3D space.  See:
-	http://mathworld.wolfram.com/Plane.html
-*/
+#include "Common/Common.h"
 
 namespace DLS {
 namespace Math {
 namespace Geometry {
+
+/*
+  A description of a 2D plane in 3D space.  See:
+  http://mathworld.wolfram.com/Plane.html
+*/
 
 template< typename Type >
 struct Plane {
