@@ -18,13 +18,13 @@ struct Photodiode {
 
   /* Member functions */
   const IntensityType 	AccumulatedIntensity() const;
-  IntensityType & 		AccumulatedIntensity();
+  IntensityType & 		  AccumulatedIntensity();
 
   // Drain the photodiode by reading it
   // which resets the value to zero
-  IntensityType 		Drain();
+  const IntensityType 		    Drain();
 
-  void 					IncidentRay( const IntensityType ray_intensity );
+  void 					        IncidentRay( const IntensityType ray_intensity );
 
   private:
   	IntensityType accumulated_intensity_;
@@ -33,7 +33,6 @@ struct Photodiode {
 
 } // namespace Physics
 } // namespace DLS
-
 
 
 #include "Physics/Photodiode.inl"

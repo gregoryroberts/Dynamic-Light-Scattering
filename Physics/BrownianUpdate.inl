@@ -4,10 +4,10 @@
 namespace DLS {
 namespace Physics {
 
-DLS_INLINE BrownianUpdate::operator()(
+DLS_INLINE void BrownianUpdate::operator()(
     const double timestep_in_seconds,
     const double root_mean_squared_velocity,
-    std::vector< Point3D< double > > & particle_list )
+    std::vector< Math::Point3D< double > > & particle_list )
 {
 
 	// update in a random amount in x, y, and z

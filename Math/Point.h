@@ -6,35 +6,32 @@
 namespace DLS {
 namespace Math {
 
-template< typename T >
+template< typename Type >
 struct Point2D {
-    Point2D( T _x, T _y )
-    : x( _x ),
-    y( _y )
-    {
-        // empty
-    }
 
-    T x;
-    T y;
+    /* Constructors */
+    Point2D();
+    Point2D( Type _x, Type _y );
+
+    Type x;
+    Type y;
 };
 
-template< typename T >
+template< typename Type >
 struct Point3D {
-    Point3D( T _x, T _y, T _z)
-    : x( _x ),
-    y( _y ),
-    z( _z )
-    {
-        // empty
-    }
 
-    T x;
-    T y;
-    T z;
+    /* Constructors */
+    Point3D();
+    Point3D( Type _x, Type _y, Type _z);
+
+    Type x;
+    Type y;
+    Type z;
 };
 
 } // namespace Math
 } // namespace DLS
+
+#include "Math/Point.inl"
 
 #endif /* __MATH_POINT_H__ */

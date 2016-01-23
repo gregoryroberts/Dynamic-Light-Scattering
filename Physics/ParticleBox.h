@@ -8,40 +8,37 @@
 namespace DLS {
 namespace Physics {
 
-template< size_t ParticleCount, size_t MaxNumberParticles >
 class ParticleBox
 {
 
   public:
-    static constexpr size_t kParticleCount = ParticleCount;
-    static constexpr size_t kMaxNumberParticles = MaxNumberParticles;
 
     /* Constructors */
     ParticleBox() = delete;
     ParticleBox(
-        ParticleType< double > * particle_types,
-        size_t * particle_counts,
-        double box_dimensions[ 3 ] );
+        const std::vector< ParticleType< double > > particle_types,
+        const std::vector< size_t > counts_of_each_particle,
+        const double box_dimensions[ 3 ] );
 
     /* Box Update Functions */
-    void Reset();
+    // setup the box, adding all particles at a randome location
+    void Setup();
     // allow each particle to be updated via a custom function
-    // update functor should have an overloaded () operator that
-    // is templated/overloadable on the particle type and is
-    // templated on the box descriptor
+    // update functor.  The update functor should take as
+    // arguments a timestep, an rms velocity for all the particles
+    // in the list and a list of positions to update
     template< typename UpdateFunctor >
     void Update(
         double timestep,
         UpdateFunctor update_model );
 
     /* Member accessor */
-     void GetLocationList(
-        std::vector< Math::Point3D< double > > & locations,
+    std::vector< Math::Point3D< double > > & GetLocationList(
         const particle_id particle_number );
 
   private:
-    ParticleType< double > * particle_types_;
-    size_t * particle_counts_;
+    std::vector< ParticleType< double > > particle_types_;
+    std::vector< size_t > counts_of_each_particle_;
 
     double box_dimensions_[ 3 ];
 

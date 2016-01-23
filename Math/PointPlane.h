@@ -25,7 +25,7 @@ Type PointPlane(
 	const Type x_normal,
 	const Type y_normal,
 	const Type z_normal,
-	const Type plane_offset);
+	const Type plane_offset );
 
 
 

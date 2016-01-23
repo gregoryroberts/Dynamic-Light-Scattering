@@ -18,7 +18,7 @@ DLS_INLINE const IntensityType Photodiode< IntensityType >::AccumulatedIntensity
 }
 
 template< typename IntensityType >
-DLS_INLINE IntensityType Photodiode< IntensityType >::AccumulatedIntensity()
+DLS_INLINE IntensityType & Photodiode< IntensityType >::AccumulatedIntensity()
 {
 	return accumulated_intensity_;
 }
