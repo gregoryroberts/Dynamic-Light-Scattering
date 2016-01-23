@@ -246,6 +246,8 @@ int main( int argc, char * argv[] )
 				const double scattering_coefficient =
 					scattering_coefficients[ type ][ angle_index ];
 
+				// todo: have to normalize by distance to
+				// observer I think!
 				const double scattered_intensity =
 					::Configuration::kLaserMaxIntensity * scattering_coefficient;
 
