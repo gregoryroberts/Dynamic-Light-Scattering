@@ -22,6 +22,7 @@ DLS_INLINE ParticleBox::ParticleBox(
 
     particle_types_ = particle_types;
     counts_of_each_particle_ = counts_of_each_particle;
+    particle_locations_.resize( particle_types_.size() );
 
     Setup();
 
@@ -29,7 +30,6 @@ DLS_INLINE ParticleBox::ParticleBox(
 
 DLS_INLINE void ParticleBox::Setup()
 {
-
     using namespace Math;
 
     particle_locations_.clear();
@@ -38,9 +38,10 @@ DLS_INLINE void ParticleBox::Setup()
     srand( time( NULL ) );
 
     for ( size_t type = 0; type < particle_types_.size(); ++type ) {
-        
+
         std::vector< Point3D< double > > & particle_list = particle_locations_[ type ];
         particle_list.resize( counts_of_each_particle_[ type ] );
+
         for ( size_t particle = 0; particle < particle_list.size(); ++particle ) {
             // randomly place the particles in the box - i.e. random location in each direction
             

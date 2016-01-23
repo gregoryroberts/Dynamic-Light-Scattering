@@ -18,9 +18,9 @@ struct Configuration {
 	static constexpr double kLaserMaxIntensity = 1.0;
 
 	/* Particle Box Dimensions */
-	static constexpr double kParticleBoxXDimensionInMeters = .001;
-	static constexpr double kParticleBoxYDimensionInMeters = .001;
-	static constexpr double kParticleBoxZDimensionInMeters = .001;
+	static constexpr double kParticleBoxXDimensionInMeters = 1e-3;
+	static constexpr double kParticleBoxYDimensionInMeters = 1e-3;
+	static constexpr double kParticleBoxZDimensionInMeters = 1e-3;
 	static constexpr double kParticleBoxVolumnInMetersCubed =
 		kParticleBoxXDimensionInMeters *
 		kParticleBoxYDimensionInMeters *
@@ -29,10 +29,25 @@ struct Configuration {
 	/* Particle Types */
 	static constexpr double kIndexOfRefractionReal = 1.0;
 	static constexpr double kIndexOfRefractionImaginary = 1.0;
-	static constexpr double kPM2_5MassInKilograms = .001;
-	static constexpr double kPM10MassInKilograms = .01;
-	static constexpr double kPM2_5ConcentrationInMolPerMeterCubed = .45;
-	static constexpr double kPM10ConcentrationInMolPerMeterCubed = .23;
+
+	// S02
+	static constexpr double kPM2_5KilogramsPerMole = 64.066e-3;
+	// ??
+	static constexpr double kPM10KilogramsPerMole = 100e-3;
+
+	static constexpr double kPM2_5KilogramsPerMeterCubed = 15e-9;
+	static constexpr double kPM10KilogramsPerMeterCubed = 15e-9;
+
+	static constexpr double kPM2_5ConcentrationInMolPerMeterCubed =
+		kPM2_5KilogramsPerMeterCubed * ( 1. / kPM2_5KilogramsPerMole );
+	static constexpr double kPM10ConcentrationInMolPerMeterCubed =
+		kPM10KilogramsPerMeterCubed * ( 1. / kPM10KilogramsPerMole );
+
+	static constexpr double kPM2_5MassInKilograms =
+		kPM2_5KilogramsPerMole / DLS::Math::Constant::kAvogadrosNumber;
+	static constexpr double kPM10MassInKilograms =
+		kPM10KilogramsPerMole / DLS::Math::Constant::kAvogadrosNumber;
+
 	static constexpr size_t kPM2_5ParticleCount =
 		static_cast< size_t >(
 			kPM2_5ConcentrationInMolPerMeterCubed *
