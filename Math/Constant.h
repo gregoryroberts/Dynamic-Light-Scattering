@@ -7,6 +7,7 @@ namespace Math {
 struct Constant
 {
 	static constexpr double kAvogadrosNumber = 6.0221409e23;
+	static constexpr double kPi = 3.14159265359;
 };
 
 } // namespace Math

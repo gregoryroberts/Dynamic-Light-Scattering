@@ -33,8 +33,7 @@ class ParticleBox
         UpdateFunctor update_model );
 
     /* Member accessor */
-    void GetLocationList(
-        std::vector< Math::Point3D< double > > & locations,
+    std::vector< Math::Point3D< double > > & GetLocationList(
         const particle_id particle_number );
 
   private:

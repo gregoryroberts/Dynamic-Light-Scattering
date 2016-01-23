@@ -22,7 +22,6 @@ DLS_INLINE ParticleBox::ParticleBox(
 
     particle_types_ = particle_types;
     counts_of_each_particle_ = counts_of_each_particle;
-    particle_locations_.resize( particle_types_.size() );
 
     Setup();
 
@@ -39,7 +38,7 @@ DLS_INLINE void ParticleBox::Setup()
 
     for ( size_t type = 0; type < particle_types_.size(); ++type ) {
 
-        std::vector< Point3D< double > > & particle_list = particle_locations_[ type ];
+        std::vector< Point3D< double > > particle_list;// = particle_locations_[ type ];
         particle_list.resize( counts_of_each_particle_[ type ] );
 
         for ( size_t particle = 0; particle < particle_list.size(); ++particle ) {
@@ -55,7 +54,8 @@ DLS_INLINE void ParticleBox::Setup()
 
             particle_list[ particle ] = Point3D< double >( x_location, y_location, z_location );
 
-        }   
+        }
+        particle_locations_.push_back( particle_list );
     }
 }
 
@@ -75,7 +75,6 @@ DLS_INLINE void ParticleBox::Update(
                 particle_mass );
 
         std::vector< Point3D< double > > & particle_list = particle_locations_[ type ];
-
         update_model(
             timestep,
             root_mean_squared_velocity,
@@ -83,8 +82,7 @@ DLS_INLINE void ParticleBox::Update(
     }
 }
 
-DLS_INLINE void ParticleBox::GetLocationList(
-    std::vector< Math::Point3D< double > > & locations,
+DLS_INLINE std::vector< Math::Point3D< double > > & ParticleBox::GetLocationList(
     const particle_id particle_number )
 {
     const size_t number_location_lists = particle_locations_.size();
@@ -93,7 +91,7 @@ DLS_INLINE void ParticleBox::GetLocationList(
         particle_number < number_location_lists,
         "This particle ID is out of bounds and thus not accounted for" );
 
-    locations = particle_locations_[ particle_number ];
+    return particle_locations_[ particle_number ];
 }
 
 } // namespace Physics
