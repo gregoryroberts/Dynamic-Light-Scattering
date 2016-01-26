@@ -10,11 +10,16 @@ namespace Physics {
 DLS_INLINE ParticleBox::ParticleBox(
     const std::vector< ParticleType< double > > particle_types,
     const std::vector< size_t > counts_of_each_particle,
-    const double box_dimensions[ 3 ] )
+    const double box_dimensions[ 3 ],
+    const double box_origin[ 3 ] )
 {
     box_dimensions_[ 0 ] = box_dimensions[ 0 ];
     box_dimensions_[ 1 ] = box_dimensions[ 1 ];
     box_dimensions_[ 2 ] = box_dimensions[ 2 ];
+
+    box_origin_[ 0 ] = box_origin[ 0 ];
+    box_origin_[ 1 ] = box_origin[ 1 ];
+    box_origin_[ 2 ] = box_origin[ 2 ];
 
     DLS_ASSERT(
         particle_types.size() == counts_of_each_particle.size(),
@@ -48,9 +53,9 @@ DLS_INLINE void ParticleBox::Setup()
             double random_y = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
             double random_z = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
 
-            double x_location = random_x * box_dimensions_[ 0 ];
-            double y_location = random_y * box_dimensions_[ 1 ];
-            double z_location = random_z * box_dimensions_[ 2 ];
+            double x_location = box_origin_[ 0 ] + random_x * box_dimensions_[ 0 ];
+            double y_location = box_origin_[ 1 ] + random_y * box_dimensions_[ 1 ];
+            double z_location = box_origin_[ 2 ] + random_z * box_dimensions_[ 2 ];
 
             particle_list[ particle ] = Point3D< double >( x_location, y_location, z_location );
 
@@ -66,6 +71,14 @@ DLS_INLINE void ParticleBox::Update(
 {
     using namespace Math;
 
+    const double x_max = box_origin_[ 0 ] + box_dimensions_[ 0 ];
+    const double y_max = box_origin_[ 1 ] + box_dimensions_[ 1 ];
+    const double z_max = box_origin_[ 2 ] + box_dimensions_[ 2 ];
+
+    const double x_min = box_origin_[ 0 ];
+    const double y_min = box_origin_[ 1 ];
+    const double z_min = box_origin_[ 2 ];
+
     for ( size_t type = 0; type < particle_locations_.size(); ++type ) {
         
         const double particle_mass = particle_types_[ type ].mass;
@@ -79,6 +92,33 @@ DLS_INLINE void ParticleBox::Update(
             timestep,
             root_mean_squared_velocity,
             particle_list );
+
+        for ( size_t particle = 0; particle < particle_list.size(); ++particle ) {
+            Math::Point3D< double > & position = particle_list[ particle ];
+            if (
+                position.x > x_max ||
+                position.x < x_min ||
+                position.y > y_max ||
+                position.y < y_min ||
+                position.z > z_max ||
+                position.z < z_min ) {
+
+                // the particle left the box, assume another one
+                // drifted in at some random spot in the box (not
+                // required to be on a periphery of the box for now)
+
+                double random_x = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
+                double random_y = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
+                double random_z = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
+
+                double x_location = box_origin_[ 0 ] + random_x * box_dimensions_[ 0 ];
+                double y_location = box_origin_[ 1 ] + random_y * box_dimensions_[ 1 ];
+                double z_location = box_origin_[ 2 ] + random_z * box_dimensions_[ 2 ];
+
+                particle_list[ particle ] = Point3D< double >( x_location, y_location, z_location );
+
+            }
+        }
     }
 }
 

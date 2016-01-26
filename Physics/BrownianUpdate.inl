@@ -34,6 +34,10 @@ DLS_INLINE void BrownianUpdate::operator()(
 		random_y *= displacement_factor;
 		random_z *= displacement_factor;
 
+		particle_list[ particle ].x += random_x;
+		particle_list[ particle ].y += random_y;
+		particle_list[ particle ].z += random_z;
+
 	}
 }
 
