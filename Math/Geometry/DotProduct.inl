@@ -14,7 +14,7 @@ DLS_INLINE const Type DotProduct(
   const Type y1,
   const Type z1 )
 {
-  return x0 * y0 + x1 * y1 + z0 * z1;
+  return x0 * x1 + y0 * y1 + z0 * z1;
 }
 
 template< typename Type >
@@ -24,7 +24,7 @@ DLS_INLINE const Type DotProduct(
   const Type x1,
   const Type y1 )
 {
-  return x0 * y0 + x1 * y1;
+  return x0 * x1 + y0 * y1;
 }
 
 } // namespace Geometry

@@ -18,7 +18,8 @@ class ParticleBox
     ParticleBox(
         const std::vector< ParticleType< double > > particle_types,
         const std::vector< size_t > counts_of_each_particle,
-        const double box_dimensions[ 3 ] );
+        const double box_dimensions[ 3 ],
+        const double box_origin[ 3 ]);
 
     /* Box Update Functions */
     // setup the box, adding all particles at a randome location
@@ -41,6 +42,7 @@ class ParticleBox
     std::vector< size_t > counts_of_each_particle_;
 
     double box_dimensions_[ 3 ];
+    double box_origin_[ 3 ];
 
     std::vector< std::vector< Math::Point3D< double > > > particle_locations_;
 

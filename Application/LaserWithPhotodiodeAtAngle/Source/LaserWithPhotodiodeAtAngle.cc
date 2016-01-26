@@ -1,6 +1,7 @@
 #include "Common/Common.h"
 #include "Math/Complex.h"
 #include "Math/Constant.h"
+#include "Math/Geometry/DotProduct.h"
 #include "Math/Geometry/PlaneAngle.h"
 #include "Math/Point.h"
 #include "Physics/Laser.h"
@@ -21,7 +22,7 @@ struct Configuration {
 	static constexpr double kLaserPositionX = 0.0;
 	static constexpr double kLaserPositionY = 0.0;
 	static constexpr double kLaserPositionZ = 0.0;
-	static constexpr double kLaserMaxIntensity = 1e10;
+	static constexpr double kLaserMaxIntensity = 1e-3;
 
 	/* Particle Box Dimensions */
 	static constexpr double kParticleBoxXDimensionInMeters = 0.25e-3;
@@ -31,6 +32,9 @@ struct Configuration {
 		kParticleBoxXDimensionInMeters *
 		kParticleBoxYDimensionInMeters *
 		kParticleBoxZDimensionInMeters;
+	static constexpr double kParticleBoxOriginX = -kLaserPositionX / 2.;
+	static constexpr double kParticleBoxOriginY = -kLaserPositionY / 2.;
+	static constexpr double kParticleBoxOriginZ = 0.0;
 
 	/* Particle Types */
 	static constexpr double kIndexOfRefractionReal = 1.0;
@@ -75,7 +79,7 @@ struct Configuration {
 	// todo: making an assumption that the photodiode is big
 	// enough to cover the full area of the light coming in
 	// and is equally efficient in all of those angles
-	static constexpr double kPhotodiodeCoordinateX = 1e-3;
+	static constexpr double kPhotodiodeCoordinateX = 1e-4;
 	static constexpr double kPhotodiodeCoordinateY = kParticleBoxYDimensionInMeters / 2.;
 	static constexpr double kPhotodiodeCoordinateZ = 0;
 
@@ -180,8 +184,18 @@ int main( int argc, char * argv[] )
 		::Configuration::kParticleBoxZDimensionInMeters
 	};
 
+	const double box_origin[ 3 ] = {
+		::Configuration::kParticleBoxOriginX,
+		::Configuration::kParticleBoxOriginY,
+		::Configuration::kParticleBoxOriginZ
+	};
+
 	/* Setup a particle box with both of these particle types */
-	ParticleBox particle_box( particle_types, particle_counts, box_dimensions );
+	ParticleBox particle_box(
+		particle_types,
+		particle_counts,
+		box_dimensions,
+		box_origin );
 
 	/* Brownian update functor */
 	BrownianUpdate brownian;
@@ -247,9 +261,34 @@ int main( int argc, char * argv[] )
 					scattering_coefficients[ type ][ angle_index ];
 
 				// todo: have to normalize by distance to
-				// observer I think!
+				// observer I think!  Double check on this
+				// couldn't this make the intensity go over the
+				// initial intensity at the scattering site
+				const double scatter_to_observer_x =
+					particle_coordinate.x - ::Configuration::kPhotodiodeCoordinateX;
+				// by assumption
+				const double scatter_to_observer_y = 0;
+				const double scatter_to_observer_z =
+					particle_coordinate.z - ::Configuration::kPhotodiodeCoordinateZ;
+
+				const double scatter_to_observer_distance =
+					sqrt(
+						Geometry::DotProduct(
+							scatter_to_observer_x,
+							scatter_to_observer_y,
+							scatter_to_observer_z,
+							scatter_to_observer_x,
+							scatter_to_observer_y,
+							scatter_to_observer_z
+						) );
+				const double scatter_to_observer_distance_reciprocal =
+					1. / scatter_to_observer_distance;
+
 				const double scattered_intensity =
-					::Configuration::kLaserMaxIntensity * scattering_coefficient;
+					::Configuration::kLaserMaxIntensity *
+					scattering_coefficient *
+					scatter_to_observer_distance_reciprocal *
+					scatter_to_observer_distance_reciprocal;
 
 				photodiode.IncidentRay( scattered_intensity );
 
@@ -257,6 +296,7 @@ int main( int argc, char * argv[] )
 		}
 
 		const double accumulated_intensity = photodiode.Drain();
+		printf("accumulated_intensity = %.15f\n", accumulated_intensity);
 
 	}
 
