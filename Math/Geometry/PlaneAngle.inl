@@ -1,6 +1,7 @@
 #ifndef __MATH_GEOMETRY_PLANE_ANGLE_INL__
 #define __MATH_GEOMETRY_PLANE_ANGLE_INL__
 
+#include "Math/Constant.h"
 #include "Math/Geometry/DotProduct.h"
 
 namespace DLS {
@@ -8,7 +9,7 @@ namespace Math {
 namespace Geometry {
 
 template< typename Type >
-DLS_INLINE const Type PlaneAngle(
+DLS_INLINE const Type PlaneAngleRadians(
     const Type first_point_x,
     const Type first_point_y,
     const Type first_point_z,
@@ -67,7 +68,7 @@ DLS_INLINE const Type PlaneAngle(
 	const Type angle = acos(
 		dot_product_between_vectors * reciprocal_magnitude_product );
 
-	return angle;
+	return Constant::kPi - angle;
 
 }
 

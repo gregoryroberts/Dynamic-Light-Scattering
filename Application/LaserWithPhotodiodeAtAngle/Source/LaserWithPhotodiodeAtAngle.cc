@@ -84,8 +84,8 @@ struct Configuration {
 	static constexpr double kPhotodiodeCoordinateZ = 0;
 
 	/* Time Parameters */
-	static constexpr double kTimestepInSeconds = 1e-3;
-	static constexpr double kTotalTimeInSeconds = 1;
+	static constexpr double kTimestepInSeconds = 1e-6;
+	static constexpr double kTotalTimeInSeconds = 1e-2;
 
 };
 
@@ -214,6 +214,8 @@ int main( int argc, char * argv[] )
 
 	const double angle_increments = 2 * Math::Constant::kPi / ::Configuration::kNumberOfAngles;
 
+	double accumulated_intensities[ number_of_iterations ];
+
 	for ( size_t run = 0; run < number_of_iterations; ++run ) {
 		/* First, update the particles in the box */
 		particle_box.Update(
@@ -240,7 +242,7 @@ int main( int argc, char * argv[] )
 					particle_coordinate.x,
 					particle_coordinate.y );
 
-				const double angle = Geometry::PlaneAngle(
+				const double angle = Geometry::PlaneAngleRadians(
 					::Configuration::kLaserPositionX,
 					particle_coordinate.y,
 					::Configuration::kLaserPositionZ,
@@ -296,10 +298,31 @@ int main( int argc, char * argv[] )
 		}
 
 		const double accumulated_intensity = photodiode.Drain();
-		printf("accumulated_intensity = %.15f\n", accumulated_intensity);
+		accumulated_intensities[ run ] = accumulated_intensity;
 
 	}
 
+	/* Write out the data */
+	std::ofstream output_file("./data2.out");
+	if ( output_file.is_open() ) {
+
+		output_file << "[ ";
+
+		for ( size_t run = 0; run < number_of_iterations; ++run ) {
+			output_file << accumulated_intensities[ run ];
+
+			if ( run != ( number_of_iterations - 1 ) ) {
+				output_file << ", ";
+			}
+
+
+		}
+
+		output_file << " ];" << std::endl;
+
+	}
+
+	output_file.close();
 
 	printf( "Hello, Dynamic Light Scattering\n" );
 

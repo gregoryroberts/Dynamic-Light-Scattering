@@ -12,5 +12,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/Bin)
 include_directories("$ENV{DLS_CODE_BASE}")
 
 # add all of the tests here
-add_subdirectory(Utils/StringToNumber)
+add_subdirectory(Math/Geometry/PlaneAngle)
 add_subdirectory(Physics/CMOSImager)
+add_subdirectory(Utils/StringToNumber)
+
