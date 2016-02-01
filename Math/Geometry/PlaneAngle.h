@@ -20,7 +20,7 @@ namespace Geometry {
     distinct when passed into the function.
 */
 template< typename Type >
-const Type PlaneAngle(
+const Type PlaneAngleRadians(
     const Type first_point_x,
     const Type first_point_y,
     const Type first_point_z,
