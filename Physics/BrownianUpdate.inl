@@ -9,34 +9,34 @@ DLS_INLINE void BrownianUpdate::operator()(
     const double root_mean_squared_velocity,
     std::vector< Math::Point3D< double > > & particle_list )
 {
+	const double max_displacement =
+		timestep_in_seconds * root_mean_squared_velocity;
 
-	// update in a random amount in x, y, and z
-	// normalizing to the rms velocity and timestep
+	constexpr double kMean = 0.0;
+	const double kStandardDeviation =
+		( 1. / sqrt( 3. ) ) * max_displacement;
 
-	double particle_displacment = root_mean_squared_velocity * timestep_in_seconds;
+    std::normal_distribution< double > x_distribution( kMean, kStandardDeviation );
+    std::normal_distribution< double > y_distribution( kMean, kStandardDeviation );
+    std::normal_distribution< double > z_distribution( kMean, kStandardDeviation );
+
+  	std::default_random_engine x_generator;
+  	std::default_random_engine y_generator;
+  	std::default_random_engine z_generator;
+
+	x_distribution.reset();
+	y_distribution.reset();
+	z_distribution.reset();
 
     for ( size_t particle = 0; particle < particle_list.size(); ++particle ) {
-		// can these be negative?
-		// because we want them to be able to be negative
-		double random_x = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
-		double random_y = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
-		double random_z = ( ( double ) rand() ) / ( ( double ) RAND_MAX );
 
-		const double norm_squared =
-			random_x * random_x +
-			random_y * random_y +
-			random_z * random_z;
+    	double next_x = x_distribution( x_generator );
+    	double next_y = y_distribution( y_generator );
+    	double next_z = z_distribution( z_generator );
 
-		const double norm = sqrt( norm_squared );
-		const double displacement_factor = particle_displacment / norm;
-
-		random_x *= displacement_factor;
-		random_y *= displacement_factor;
-		random_z *= displacement_factor;
-
-		particle_list[ particle ].x += random_x;
-		particle_list[ particle ].y += random_y;
-		particle_list[ particle ].z += random_z;
+		particle_list[ particle ].x += next_x;x_distribution( x_generator );
+		particle_list[ particle ].y += next_y;y_distribution( y_generator );
+		particle_list[ particle ].z += next_z;z_distribution( z_generator );
 
 	}
 }

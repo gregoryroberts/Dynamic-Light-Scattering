@@ -216,6 +216,9 @@ int main( int argc, char * argv[] )
 
 	double accumulated_intensities[ number_of_iterations ];
 
+	double progress_increment = 1.;
+	double next_progress_update = progress_increment;
+
 	for ( size_t run = 0; run < number_of_iterations; ++run ) {
 		/* First, update the particles in the box */
 		particle_box.Update(
@@ -300,10 +303,18 @@ int main( int argc, char * argv[] )
 		const double accumulated_intensity = photodiode.Drain();
 		accumulated_intensities[ run ] = accumulated_intensity;
 
+		const double progress =
+			( 100. * (double) run / (double) number_of_iterations );
+
+		if ( progress > next_progress_update ) {
+			printf( "Progress: %g percent\n", progress );
+			next_progress_update += progress_increment;
+		}
+
 	}
 
 	/* Write out the data */
-	std::ofstream output_file("./data2.out");
+	std::ofstream output_file("./data3.out");
 	if ( output_file.is_open() ) {
 
 		output_file << "[ ";
