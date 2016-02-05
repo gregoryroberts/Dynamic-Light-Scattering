@@ -37,8 +37,8 @@ struct Configuration {
 	static constexpr double kParticleBoxOriginZ = 0.0;
 
 	/* Particle Types */
-	static constexpr double kIndexOfRefractionReal = 1.0;
-	static constexpr double kIndexOfRefractionImaginary = 1.0;
+	static constexpr double kIndexOfRefractionReal = 1.5;
+	static constexpr double kIndexOfRefractionImaginary = 0.0;
 
 	static constexpr size_t kNumberOfParticles = 2;
 
