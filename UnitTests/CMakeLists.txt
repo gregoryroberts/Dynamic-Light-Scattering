@@ -13,6 +13,7 @@ include_directories("$ENV{DLS_CODE_BASE}")
 
 # add all of the tests here
 add_subdirectory(Math/Geometry/PlaneAngle)
+add_subdirectory(Physics/BrownianUpdate)
 add_subdirectory(Physics/CMOSImager)
 add_subdirectory(Utils/StringToNumber)
 
